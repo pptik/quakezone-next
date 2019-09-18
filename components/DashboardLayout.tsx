@@ -219,7 +219,9 @@ const DashboardLayout: FunctionComponent<{ children: any; title?: string; avatar
             <ListItem button>
               <ListItemIcon>
                 
-                {React.createElement('ion-icon', {name: "bulb"})}
+                {React.createElement('ion-icon', {
+                  name: "paw",
+                  style: {fontSize: "x-large"}})}
                 
               </ListItemIcon>
               <ListItemText primary="Tips Saat Gempa" />

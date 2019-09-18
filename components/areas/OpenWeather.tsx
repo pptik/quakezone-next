@@ -6,7 +6,7 @@ import Head from "next/head";
 const useStyles = makeStyles(theme => ({
     weather: {
         padding: "1rem",
-        background: "linear-gradient(to right, #FFFFFF, #6DD5FA, #49A0D9)",
+        background: "linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9)",
     }
 }));
 
@@ -31,11 +31,11 @@ const OpenWeather: FunctionComponent<{ apiKey: string, q: string }> = ({ apiKey,
                 {!data && <Grid item xs={6}>
                     <CircularProgress />
                 </Grid>}
-                {data && <Grid item xs={6}>
+                {data && <Grid item xs={6} style={{color: "darkcyan"}}>
                     <div><i className={`owi owi-${data.weather[0].icon}`} style={{fontSize: "3rem"}}></i></div>
                     <h1 style={{marginBottom: 0}}>{data.main.temp.toFixed(1)}°C</h1>
                 </Grid>}
-                {data && <Grid item xs={6} style={{textAlign: "right"}}>
+                {data && <Grid item xs={6} style={{textAlign: "right", color: "lightcyan"}}>
                     <Typography>{data.weather[0].main}</Typography>
                     <h2 style={{marginBottom: 0}}>{data.name}, {data.sys.country}</h2>
                 </Grid>}

@@ -1,0 +1,27 @@
+{
+  "name": "quakezone-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.1",
+    "@material-ui/core": "^4.4.2",
+    "@material-ui/icons": "^4.4.1",
+    "@material-ui/styles": "^4.4.1",
+    "apollo-boost": "^0.4.4",
+    "clsx": "^1.0.4",
+    "graphql": "^14.5.6",
+    "next": "9.0.5",
+    "next-with-apollo": "^4.3.0",
+    "node-fetch": "^2.6.0",
+    "react": "16.9.0",
+    "react-dom": "16.9.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.3"
+  }
+}

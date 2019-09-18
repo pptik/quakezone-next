@@ -8,30 +8,19 @@ import Greeting from "../components/areas/Greeting";
 const useStyles = makeStyles(theme => ({
   }));
   
-function index() {
+function Index() {
   const classes = useStyles();
 
   return (
     <DashboardLayout avatarUrl="/static/favicon.png">
-    
-    <Greeting
-      
-      
-      who="Devi"
-      
-      
-    />
-    
-    <Greeting
-      
-      
-      who="Helmi"
-      
-      
-    />
-    
-    </DashboardLayout>
+            <Greeting
+                  who="Devi"
+                  />
+            <Greeting
+                  who="Helmi"
+                  />
+          </DashboardLayout>
   );
 }
 
-export default index;
+export default Index;

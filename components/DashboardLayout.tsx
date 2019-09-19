@@ -117,6 +117,11 @@ const useStyles = makeStyles(theme => ({
   },
   fixedHeight: {
     height: 240
+  },
+  avatarIcon: {
+    marginRight: "1rem",
+    backgroundColor: theme.palette.primary.main,
+    fontSize: "3rem"
   }
 }));
 
@@ -142,8 +147,16 @@ const useStyles = makeStyles(theme => ({
 //     );
 //   }
 
-const DashboardLayout: FunctionComponent<{ children: any; title?: string; avatarUrl?: string }> = ({
-  children, title, avatarUrl
+interface Props {
+  children: any;
+  title?: string;
+  avatarUrl?: string;
+  avatarIcon?: string;
+  avatarIconSet?: "Ionicons" | undefined;
+}
+
+const DashboardLayout: FunctionComponent<Props> = ({
+  children, title, avatarUrl, avatarIcon, avatarIconSet
 }) => {
   title = title || "QuakeZone";
   const classes = useStyles();
@@ -177,7 +190,11 @@ const DashboardLayout: FunctionComponent<{ children: any; title?: string; avatar
           >
             <MenuIcon />
           </IconButton>
-          {avatarUrl && <Avatar alt="Profile Picture" src={avatarUrl} style={{background: "white", marginRight: "1rem"}} />}
+          {avatarUrl && !avatarIcon && <Avatar src={avatarUrl} style={{background: "white", marginRight: "1rem"}} />}
+          {avatarIcon &&
+            <Avatar className={classes.avatarIcon}>
+                {React.createElement("ion-icon", {name: avatarIcon})}
+            </Avatar>}
           <Typography
             component="h1"
             variant="h6"
@@ -240,6 +257,19 @@ const DashboardLayout: FunctionComponent<{ children: any; title?: string; avatar
                 
               </ListItemIcon>
               <ListItemText primary="Earthquakes" />
+            </ListItem>
+          </Link>
+          
+          <Link href="/tsunamis">
+            <ListItem button>
+              <ListItemIcon>
+                
+                {React.createElement('ion-icon', {
+                  name: "water",
+                  style: {fontSize: "x-large"}})}
+                
+              </ListItemIcon>
+              <ListItemText primary="Tsunamis" />
             </ListItem>
           </Link>
           

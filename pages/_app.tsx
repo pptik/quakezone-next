@@ -1,7 +1,6 @@
 import { ApolloProvider } from "@apollo/react-hooks";
 import App from "next/app";
-// import withApollo from "../lib/withApollo";
-//import { apolloClient } from "../lib/initApollo";
+import withApollo from "../lib/withApollo";
 import React from "react";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/styles";
@@ -20,7 +19,7 @@ class MyApp extends App<any> {
   render() {
     const { Component, pageProps, apollo } = this.props;
     return (
-      /* <ApolloProvider client={apollo}> */
+      <ApolloProvider client={apollo}>
         <React.Fragment>
           <Head>
             <title>QuakeZone</title>
@@ -31,10 +30,9 @@ class MyApp extends App<any> {
             <Component {...pageProps} />
           </ThemeProvider>
         </React.Fragment>
-      /* </ApolloProvider> */
+      </ApolloProvider>
     );
   }
 }
 
-// export default withApollo(MyApp);
-export default MyApp;
+export default withApollo(MyApp);

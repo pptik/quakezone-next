@@ -19,8 +19,8 @@ const ItemGridStandard: FunctionComponent<Props> =
   const classes = useStyles();
   return (
     <Grid container spacing={2}>
-      {items.map((item: any) => (
-        <Grid item xs={12} sm={6}>
+      {items.map((item: any, index: number) => (
+        <Grid item key={index} xs={12} sm={6}>
         <Card>
           <CardHeader 
             avatar={getItemIcon(item) ? <Avatar style={{color: getItemIconColor(item), background: getItemIconBackground(item)}}>{React.createElement("ion-icon", {name: getItemIcon(item)})}</Avatar> : undefined}

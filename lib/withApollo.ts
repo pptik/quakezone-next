@@ -12,10 +12,14 @@ export default withApollo(
         //const token = STRAPI_TOKEN;
         const token = undefined;
         operation.setContext({
+          fetchOptions: {
+            // credentials: "include"
+          },
           headers: {
             authorization: token ? `Bearer ${token}` : undefined
           }
         });
       }
-    })
+    }),
+  { getDataFromTree: "ssr" }
 );

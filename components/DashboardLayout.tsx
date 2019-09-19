@@ -230,6 +230,19 @@ const DashboardLayout: FunctionComponent<{ children: any; title?: string; avatar
             </ListItem>
           </Link>
           
+          <Link href="/quakes">
+            <ListItem button>
+              <ListItemIcon>
+                
+                {React.createElement('ion-icon', {
+                  name: "wifi",
+                  style: {fontSize: "x-large"}})}
+                
+              </ListItemIcon>
+              <ListItemText primary="Earthquakes" />
+            </ListItem>
+          </Link>
+          
         </List>
       </Drawer>
       <main className={classes.content}>

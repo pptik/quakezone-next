@@ -14,8 +14,8 @@ function TipsSaatGempa() {
   return (
     <DashboardLayout avatarUrl="/static/favicon.png">
             <Greeting
-                  who="Devi item jelekkkkk"
-                  />
+                who={"Devi item jelekkkkk"}
+                                          />
           </DashboardLayout>
   );
 }

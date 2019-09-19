@@ -16,15 +16,15 @@ function Index() {
   return (
     <DashboardLayout avatarUrl="/static/favicon.png">
             <OpenWeather
-                  apiKey="3f26d574783375468ea4ba416796d8b9"
-            q="London, UK"
-                  />
+                apiKey={"3f26d574783375468ea4ba416796d8b9"}
+                q={"London, UK"}
+                                          />
             <Greeting
-                  who="Devi"
-                  />
+                who={"Devi"}
+                                          />
             <Greeting
-                  who="Helmi"
-                  />
+                who={"Helmi"}
+                                          />
           </DashboardLayout>
   );
 }

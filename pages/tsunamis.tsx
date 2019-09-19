@@ -56,8 +56,8 @@ function Tsunamis() {
           </span>
         }
       />}
-      {!tsunamiEvents.loading && !tsunamiEvents.error && <ItemGridStandard
-                        items={(tsunamiEvents.data && tsunamiEvents.data.quakes2) || []}
+      {!tsunamiEvents.loading && !tsunamiEvents.error &&       <ItemGridStandard
+                        items={tsunamiEvents.data.quakes2}
                         getItemIconColor={it => undefined}
                         getItemIcon={it => it.noaaTsunami ? 'water' : 'wifi'}
                 getItemIconBackground={it => it.mw >= 7 ? 'red' : 'silver'}

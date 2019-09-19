@@ -36,7 +36,7 @@ function TipsSaatGempa() {
       avatarIcon="paw"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-      <Greeting
+            <Greeting
                 who={"Devi item jelekkkkk"}
                                           />
     </DashboardLayout>

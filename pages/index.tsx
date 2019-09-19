@@ -38,14 +38,14 @@ function Index() {
       
       
       avatarUrl="/static/favicon.png">
-      <OpenWeather
+            <OpenWeather
                 apiKey={"3f26d574783375468ea4ba416796d8b9"}
                 q={"Bandung, ID"}
                                           />
-      <Greeting
+            <Greeting
                 who={"Devi"}
                                           />
-      <Greeting
+            <Greeting
                 who={"Helmi"}
                                           />
     </DashboardLayout>

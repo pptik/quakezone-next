@@ -56,8 +56,8 @@ function Quakes() {
           </span>
         }
       />}
-      {!quakes.loading && !quakes.error && <ItemGridStandard
-                        items={(quakes.data && quakes.data.quakes2) || []}
+      {!quakes.loading && !quakes.error &&       <ItemGridStandard
+                        items={quakes.data.quakes2}
                         getItemIconColor={it => undefined}
                         getItemIcon={it => it.noaaTsunami ? 'water' : 'wifi'}
                 getItemIconBackground={it => it.mw >= 7 ? 'red' : 'silver'}

@@ -33,14 +33,62 @@ function Tsunamis() {
   // Queries
   const tsunamiEvents = useQuery(gql`
   {
-  quakes2 {
-    id, mw, name, noaaLocation, noaaTsunami, originTime
+  tsunamiSources2(filter:{limit: 100}) {
+    abe
+    causeCode
+    country
+    damageDescription
+    damageMillionsDollars
+    day
+    deaths
+    deathsDescription
+    eventValidity
+    focalDepth
+    hour
+    housesDamaged
+    housesDamagedDescription
+    housesDestroyed
+    housesDestroyedDescription
+    id
+    iida
+    injuries
+    injuriesDescription
+    intensitySoloviev
+    latitude
+    locationName
+    longitude
+    maxWaterHeight
+    minute
+    missing
+    missingDescription
+    month
+    primaryMagnitude
+    regionCode
+    second
+    state
+    totalDamageMillionsDollars
+    totalDamageMillionsDollarsDescription
+    totalDeaths
+    totalDeathsDescription
+    totalHousesDamaged
+    totalHousesDamagedDescription
+    totalHousesDestroyed
+    totalHousesDestroyedDescription
+    totalInjuries
+    totalInjuriesDescription
+    totalMissing
+    totalMissingDescription
+    warningStatus
+    year
   } 
 }
-
   `);
   // Item mappers
   const tsunamiEventsItemMapper = (it: any) => ({
+    "title": it.locationName,
+    "subheader": it.primaryMagnitude,
+    "icon": ("water"),
+    "iconBackground": (it.primaryMagnitude >= 7 ? "red" : "silver"),
   });
   
 
@@ -63,7 +111,7 @@ function Tsunamis() {
         }
       />}
       {!tsunamiEvents.loading && !tsunamiEvents.error &&       <ItemGridStandard
-                        items={tsunamiEvents.data.quakes2.map(tsunamiEventsItemMapper)}
+                        items={tsunamiEvents.data.tsunamiSources2.map(tsunamiEventsItemMapper)}
                                   />}
     </DashboardLayout>
   );

@@ -268,6 +268,19 @@ const DashboardLayout: FunctionComponent<Props> = ({
             </ListItem>
           </Link>
           
+          <Link href="/tsunami-runups">
+            <ListItem button>
+              <ListItemIcon>
+                
+                {React.createElement('ion-icon', {
+                  name: "water",
+                  style: {fontSize: "x-large"}})}
+                
+              </ListItemIcon>
+              <ListItemText primary="Tsunami Runups" />
+            </ListItem>
+          </Link>
+          
         </List>
       </Drawer>
       <main className={classes.content}>

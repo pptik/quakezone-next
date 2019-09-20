@@ -28,95 +28,86 @@ const useStyles = makeStyles(theme => ({
   },
 }));
   
-function TsunamiSources() {
+function TsunamiRunups() {
   const classes = useStyles();
   // Queries
-  const tsunamiSources = useQuery(gql`
+  const tsunamiRunups = useQuery(gql`
   {
-  tsunamiSources3(filter:{limit: 100, order:"year DESC"}) {
-    causeCode
+  tsunamiRunups2(filter: {limit: 100, order: "year DESC"}) {
+    arrivalDay
+    arrivalHour
+    arrivalMinute
     country
     damageDescription
     damageMillionsDollars
     day
     deaths
     deathsDescription
-    eventValidity
-    focalDepth
+    distanceFromSource
+    doubtful
+    firstMotion
+    horizontalInundation
     hour
     housesDamaged
     housesDamagedDescription
     housesDestroyed
     housesDestroyedDescription
     id
+    infoSource
     injuries
     injuriesDescription
     latitude
     locationName
     longitude
-    maxWaterHeight
     minute
-    missing
-    missingDescription
     month
-    primaryMagnitude
+    noaaTsunamiEventId
+    noaaTsunamiRunupId
+    period
     regionCode
     second
     state
-    totalDamageMillionsDollars
-    totalDamageMillionsDollarsDescription
-    totalDeaths
-    totalDeathsDescription
-    totalHousesDamaged
-    totalHousesDamagedDescription
-    totalHousesDestroyed
-    totalHousesDestroyedDescription
-    totalInjuries
-    totalInjuriesDescription
-    totalMissing
-    totalMissingDescription
-    warningStatus
+    travelTimeHours
+    travelTimeMinutes
+    tsunamiSource
+    typeOfMeasurement
+    waterHeight
     year
-    tsunamiMagnitudeAbe
-    tsunamiMagnitudeIida
-    tsunamiIntensitySoloviev
-    noaaTsunamiEventId
-    infoSource
- } 
+  } 
 }
   `);
   // Item mappers
-  const tsunamiSourcesItemMapper = (it: any) => ({
-    "title": (`${it.locationName} ${it.year}-${it.month}-${it.day}`),
-    "subheader": it.primaryMagnitude,
+  const tsunamiRunupsItemMapper = (it: any) => ({
     "icon": ("water"),
-    "iconBackground": (it.primaryMagnitude >= 7 ? "red" : "silver"),
+    "title": it.locationName,
+    "subheader": (`${it.year}-${it.month}-${it.arrivalDay} ${it.arrivalHour}:${it.arrivalMinute} (${it.waterHeight} meters)`),
+    "iconBackground": (it.waterHeight > 3 ? "red" : (it.waterHeight > 1 ? "orange" : "green")),
   });
   
 
   return (
     <DashboardLayout
-      title="Tsunami Sources"
+      title="Tsunami Runups"
       avatarIcon="water"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-      {tsunamiSources.loading && <CircularProgress />}
-      {tsunamiSources.error && 
+      {tsunamiRunups.loading && <CircularProgress />}
+      {tsunamiRunups.error && 
         <SnackbarContent
         className={clsx(classes.error)}
-        aria-describedby="tsunamiSources-snackbar"
+        aria-describedby="tsunamiRunups-snackbar"
         message={
-          <span id="tsunamiSources-snackbar" className={classes.message}>
+          <span id="tsunamiRunups-snackbar" className={classes.message}>
             <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
-            {tsunamiSources.error.message}
+            {tsunamiRunups.error.message}
           </span>
         }
       />}
-      {!tsunamiSources.loading && !tsunamiSources.error &&       <ItemGridStandard
-                        items={tsunamiSources.data.tsunamiSources3.map(tsunamiSourcesItemMapper)}
+      {!tsunamiRunups.loading && !tsunamiRunups.error &&       <ItemGridStandard
+                        items={tsunamiRunups.data.tsunamiRunups2.map(tsunamiRunupsItemMapper)}
                                   />}
     </DashboardLayout>
   );
 }
 
-export default TsunamiSources;
+export default TsunamiRunups;

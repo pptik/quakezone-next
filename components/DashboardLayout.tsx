@@ -255,7 +255,7 @@ const DashboardLayout: FunctionComponent<Props> = ({
             </ListItem>
           </Link>
           
-          <Link href="/tsunamis">
+          <Link href="/tsunami-sources">
             <ListItem button>
               <ListItemIcon>
                 
@@ -264,7 +264,7 @@ const DashboardLayout: FunctionComponent<Props> = ({
                   style: {fontSize: "x-large"}})}
                 
               </ListItemIcon>
-              <ListItemText primary="Tsunamis" />
+              <ListItemText primary="Tsunami Sources" />
             </ListItem>
           </Link>
           

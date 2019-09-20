@@ -28,13 +28,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
   
-function Tsunamis() {
+function TsunamiSources() {
   const classes = useStyles();
   // Queries
   const tsunamiSources = useQuery(gql`
   {
   tsunamiSources2(filter:{limit: 100, order:"year DESC"}) {
-    abe
     causeCode
     country
     damageDescription
@@ -50,10 +49,8 @@ function Tsunamis() {
     housesDestroyed
     housesDestroyedDescription
     id
-    iida
     injuries
     injuriesDescription
-    intensitySoloviev
     latitude
     locationName
     longitude
@@ -80,7 +77,12 @@ function Tsunamis() {
     totalMissingDescription
     warningStatus
     year
-  } 
+    tsunamiMagnitudeAbe
+    tsunamiMagnitudeIida
+    tsunamiIntensitySoloviev
+    noaaTsunamiId
+    infoSource
+ } 
 }
   `);
   // Item mappers
@@ -94,7 +96,7 @@ function Tsunamis() {
 
   return (
     <DashboardLayout
-      title="Tsunamis"
+      title="Tsunami Sources"
       avatarIcon="water"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
@@ -117,4 +119,4 @@ function Tsunamis() {
   );
 }
 
-export default Tsunamis;
+export default TsunamiSources;

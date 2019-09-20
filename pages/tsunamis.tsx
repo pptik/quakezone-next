@@ -31,9 +31,9 @@ const useStyles = makeStyles(theme => ({
 function Tsunamis() {
   const classes = useStyles();
   // Queries
-  const tsunamiEvents = useQuery(gql`
+  const tsunamiSources = useQuery(gql`
   {
-  tsunamiSources2(filter:{limit: 100}) {
+  tsunamiSources2(filter:{limit: 100, order:"year DESC"}) {
     abe
     causeCode
     country
@@ -84,8 +84,8 @@ function Tsunamis() {
 }
   `);
   // Item mappers
-  const tsunamiEventsItemMapper = (it: any) => ({
-    "title": it.locationName,
+  const tsunamiSourcesItemMapper = (it: any) => ({
+    "title": (`${it.locationName} ${it.year}-${it.month}-${it.day}`),
     "subheader": it.primaryMagnitude,
     "icon": ("water"),
     "iconBackground": (it.primaryMagnitude >= 7 ? "red" : "silver"),
@@ -98,20 +98,20 @@ function Tsunamis() {
       avatarIcon="water"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-      {tsunamiEvents.loading && <CircularProgress />}
-      {tsunamiEvents.error && 
+      {tsunamiSources.loading && <CircularProgress />}
+      {tsunamiSources.error && 
         <SnackbarContent
         className={clsx(classes.error)}
-        aria-describedby="tsunamiEvents-snackbar"
+        aria-describedby="tsunamiSources-snackbar"
         message={
-          <span id="tsunamiEvents-snackbar" className={classes.message}>
+          <span id="tsunamiSources-snackbar" className={classes.message}>
             <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
-            {tsunamiEvents.error.message}
+            {tsunamiSources.error.message}
           </span>
         }
       />}
-      {!tsunamiEvents.loading && !tsunamiEvents.error &&       <ItemGridStandard
-                        items={tsunamiEvents.data.tsunamiSources2.map(tsunamiEventsItemMapper)}
+      {!tsunamiSources.loading && !tsunamiSources.error &&       <ItemGridStandard
+                        items={tsunamiSources.data.tsunamiSources2.map(tsunamiSourcesItemMapper)}
                                   />}
     </DashboardLayout>
   );

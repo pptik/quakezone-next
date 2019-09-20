@@ -5,6 +5,7 @@ import { Grid, makeStyles, Paper,
 import ErrorIcon from '@material-ui/icons/Error';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import * as dateFns from "date-fns";
 
 import Greeting from "../components/areas/Greeting";
 
@@ -29,6 +30,11 @@ const useStyles = makeStyles(theme => ({
   
 function TipsSaatGempa() {
   const classes = useStyles();
+  // Queries
+  // Item mappers
+  const hello3ItemMapper = (it: any) => ({
+  });
+  
 
   return (
     <DashboardLayout

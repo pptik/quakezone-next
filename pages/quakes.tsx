@@ -5,6 +5,7 @@ import { Grid, makeStyles, Paper,
 import ErrorIcon from '@material-ui/icons/Error';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import * as dateFns from "date-fns";
 
 import ItemGridStandard from "../components/areas/ItemGridStandard";
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles(theme => ({
   
 function Quakes() {
   const classes = useStyles();
+  // Queries
   const quakes = useQuery(gql`
   {
   quakes2 {
@@ -37,6 +39,14 @@ function Quakes() {
 }
 
   `);
+  // Item mappers
+  const quakesItemMapper = (it: any) => ({
+    "title": it.name,
+    "icon": (it.noaaTsunami ? 'water' : 'wifi'),
+    "iconBackground": (it.mw >= 7 ? 'red' : 'silver'),
+    "subheader": dateFns.format(dateFns.parseISO(it.originTime), "PPpppp"),
+  });
+  
 
   return (
     <DashboardLayout
@@ -57,13 +67,8 @@ function Quakes() {
         }
       />}
       {!quakes.loading && !quakes.error &&       <ItemGridStandard
-                        items={quakes.data.quakes2}
-                        getItemIconColor={it => undefined}
-                        getItemIcon={it => it.noaaTsunami ? 'water' : 'wifi'}
-                getItemIconBackground={it => it.mw >= 7 ? 'red' : 'silver'}
-                getItemSubheader={it => it.originTime}
-                getItemTitle={it => it.name}
-                  />}
+                        items={quakes.data.quakes2.map(quakesItemMapper)}
+                                  />}
     </DashboardLayout>
   );
 }

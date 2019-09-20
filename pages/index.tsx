@@ -5,6 +5,7 @@ import { Grid, makeStyles, Paper,
 import ErrorIcon from '@material-ui/icons/Error';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import * as dateFns from "date-fns";
 
 import OpenWeather from "../components/areas/OpenWeather";
 
@@ -31,6 +32,15 @@ const useStyles = makeStyles(theme => ({
   
 function Index() {
   const classes = useStyles();
+  // Queries
+  // Item mappers
+  const weatherItemMapper = (it: any) => ({
+  });
+  const helloItemMapper = (it: any) => ({
+  });
+  const hello2ItemMapper = (it: any) => ({
+  });
+  
 
   return (
     <DashboardLayout

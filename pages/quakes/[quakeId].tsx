@@ -9,7 +9,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
 import Panel from "..\\..\\components\\areas\\Panel";
-import TextField from "..\\..\\components\\areas\\TextField";
+import TextFieldEntry from "..\\..\\components\\areas\\TextFieldEntry";
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -65,8 +65,15 @@ function QuakeId() {
       }
     />}
     {!quakeDetail_panel.loading && !quakeDetail_panel.error &&     <Panel
-
-        />}
+>
+            <TextFieldEntry
+            label="Name"
+                        value={quakeDetail_panel.data.quake.name}
+/>            <TextFieldEntry
+            label="Origin time"
+                        value={quakeDetail_panel.data.quake.originTime}
+/>        </Panel>
+        }
 
     </DashboardLayout>
   );

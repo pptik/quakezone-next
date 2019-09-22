@@ -87,7 +87,7 @@ function TsunamiSources() {
   `);
   // Item mappers
   const tsunamiSourcesItemMapper = (it: any) => ({
-    "title": (`${it.locationName} ${it.year}-${it.month}-${it.day}`),
+    "title": (`${it.latitude},${it.longitude} - ${it.locationName} ${it.year}-${it.month}-${it.day}`),
     "subheader": it.primaryMagnitude,
     "icon": ("water"),
     "iconBackground": (it.primaryMagnitude >= 7 ? "red" : "silver"),

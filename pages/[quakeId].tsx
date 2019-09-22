@@ -7,10 +7,6 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
 
-import OpenWeather from "../components/areas/OpenWeather";
-
-import Greeting from "../components/areas/Greeting";
-
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -30,36 +26,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
   
-function Index() {
+function QuakeId() {
   const classes = useStyles();
   // Queries
   // Item mappers
-  const weatherItemMapper = (it: any) => ({
-  });
-  const helloItemMapper = (it: any) => ({
-  });
-  const hello2ItemMapper = (it: any) => ({
-  });
   
 
   return (
     <DashboardLayout
-      title="QuakeZone"
-      
-      
+      title="Quake detail"
+      avatarIcon="wifi"
+      avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-            <OpenWeather
-                apiKey={"3f26d574783375468ea4ba416796d8b9"}
-                q={"Jakarta, ID"}
-                                          />
-            <Greeting
-                who={"Devi"}
-                                          />
-            <Greeting
-                who={"Helmi"}
-                                          />
     </DashboardLayout>
   );
 }
 
-export default Index;
+export default QuakeId;

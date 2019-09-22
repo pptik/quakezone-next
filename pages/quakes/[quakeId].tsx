@@ -1,12 +1,13 @@
+
 import clsx from "clsx";
-import DashboardLayout from "../components/DashboardLayout";
+import DashboardLayout from "..\\..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
-
+import TextField from "..\\..\\components\\areas\\TextField";
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -30,6 +31,8 @@ function QuakeId() {
   const classes = useStyles();
   // Queries
   // Item mappers
+  const quakeDetail_nameItemMapper = (it: any) => ({
+  });
   
 
   return (
@@ -38,6 +41,9 @@ function QuakeId() {
       avatarIcon="wifi"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
+            <TextField
+                label={"Name"}
+                                          />
     </DashboardLayout>
   );
 }

@@ -13,6 +13,7 @@
     "@material-ui/icons": "^4.4.1",
     "@material-ui/styles": "^4.4.1",
     "apollo-boost": "^0.4.4",
+    "babel-plugin-root-import": "^6.4.1",
     "clsx": "^1.0.4",
     "date-fns": "^2.2.1",
     "graphql": "^14.5.6",

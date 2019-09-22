@@ -1,14 +1,13 @@
+
 import clsx from "clsx";
-import DashboardLayout from "../components/DashboardLayout";
+import DashboardLayout from "..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
-
-import ItemGridStandard from "../components/areas/ItemGridStandard";
-
+import ItemGridStandard from "..\\components\\areas\\ItemGridStandard";
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -83,8 +82,7 @@ function TsunamiSources() {
     noaaTsunamiEventId
     infoSource
  } 
-}
-  `);
+}`);
   // Item mappers
   const tsunamiSourcesItemMapper = (it: any) => ({
     "title": (`${it.latitude},${it.longitude} - ${it.locationName} ${it.year}-${it.month}-${it.day}`),

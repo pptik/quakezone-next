@@ -68,6 +68,7 @@ function Quakes() {
     />}
     {!quakes.loading && !quakes.error &&     <ItemGridStandard
       items={quakes.data.quakes2.map(quakesItemMapper)}
+
         />}
 
     </DashboardLayout>

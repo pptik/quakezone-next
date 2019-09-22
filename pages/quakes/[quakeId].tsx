@@ -36,8 +36,7 @@ function QuakeId() {
   const quakeDetail_panel = useQuery(gql`
   query QuakeDetail($id: String!) {
   quake(id: $id) {
-    id
-    collectionName
+    id, mw, name, noaaLocation, noaaTsunami, originTime
   }
 }
 `, {
@@ -66,10 +65,8 @@ function QuakeId() {
       }
     />}
     {!quakeDetail_panel.loading && !quakeDetail_panel.error &&     <Panel
+
         />}
-        <TextField
-      label="Name"
-              />
 
     </DashboardLayout>
   );

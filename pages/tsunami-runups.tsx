@@ -104,6 +104,7 @@ function TsunamiRunups() {
     />}
     {!tsunamiRunups.loading && !tsunamiRunups.error &&     <ItemGridStandard
       items={tsunamiRunups.data.tsunamiRunups2.map(tsunamiRunupsItemMapper)}
+
         />}
 
     </DashboardLayout>

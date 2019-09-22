@@ -43,13 +43,16 @@ function Index() {
               <OpenWeather
       apiKey="3f26d574783375468ea4ba416796d8b9"
             q="Bandung, ID"
-              />
+      
+        />
         <Greeting
       who="Devi"
-              />
+      
+        />
         <Greeting
       who="Helmi"
-              />
+      
+        />
 
     </DashboardLayout>
   );

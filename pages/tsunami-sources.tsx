@@ -113,6 +113,7 @@ function TsunamiSources() {
     />}
     {!tsunamiSources.loading && !tsunamiSources.error &&     <ItemGridStandard
       items={tsunamiSources.data.tsunamiSources3.map(tsunamiSourcesItemMapper)}
+
         />}
 
     </DashboardLayout>

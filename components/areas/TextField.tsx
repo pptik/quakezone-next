@@ -5,11 +5,11 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(theme => ({
 }));
 
-const TextField: FunctionComponent<{ label: string }> = ({ label }) => {
+const TextField: FunctionComponent<{ label: string, value?: string }> = ({ label, value }) => {
     const classes = useStyles();
     return (
         <Paper>
-            {label}
+            {label}: {value}
         </Paper>
     );
 };

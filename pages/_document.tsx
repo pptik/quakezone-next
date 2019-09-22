@@ -26,9 +26,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
           <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
-          {/*
-          // @ts-ignore */}
-          <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>        
+          <script noModule={false} src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>        
         </body>
       </html>
     );

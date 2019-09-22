@@ -4,6 +4,7 @@ import DashboardLayout from "..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
@@ -32,30 +33,24 @@ function Index() {
   const classes = useStyles();
   // Queries
   // Item mappers
-  const weatherItemMapper = (it: any) => ({
-  });
-  const helloItemMapper = (it: any) => ({
-  });
-  const hello2ItemMapper = (it: any) => ({
-  });
   
-
   return (
     <DashboardLayout
       title="QuakeZone"
       
       
       avatarUrl="/static/favicon.png">
-            <OpenWeather
-                apiKey={"3f26d574783375468ea4ba416796d8b9"}
-                q={"Jakarta, ID"}
-                                          />
-            <Greeting
-                who={"Devi"}
-                                          />
-            <Greeting
-                who={"Helmi"}
-                                          />
+              <OpenWeather
+      apiKey="3f26d574783375468ea4ba416796d8b9"
+            q="Bandung, ID"
+              />
+        <Greeting
+      who="Devi"
+              />
+        <Greeting
+      who="Helmi"
+              />
+
     </DashboardLayout>
   );
 }

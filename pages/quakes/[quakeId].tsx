@@ -4,9 +4,11 @@ import DashboardLayout from "..\\..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
+import Panel from "..\\..\\components\\areas\\Panel";
 import TextField from "..\\..\\components\\areas\\TextField";
 
 const useStyles = makeStyles(theme => ({
@@ -29,11 +31,21 @@ const useStyles = makeStyles(theme => ({
   
 function QuakeId() {
   const classes = useStyles();
+  const router = useRouter();
   // Queries
-  // Item mappers
-  const quakeDetail_nameItemMapper = (it: any) => ({
+  const quakeDetail_panel = useQuery(gql`
+  query QuakeDetail($id: String!) {
+  quake(id: $id) {
+    id
+    collectionName
+  }
+}
+`, {
+    "variables": {
+      "id": router.query.quakeId,
+    },
   });
-  
+  // Item mappers
 
   return (
     <DashboardLayout
@@ -41,9 +53,24 @@ function QuakeId() {
       avatarIcon="wifi"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-            <TextField
-                label={"Name"}
-                                          />
+          {quakeDetail_panel.loading && <CircularProgress />}
+    {quakeDetail_panel.error && 
+      <SnackbarContent
+      className={clsx(classes.error)}
+      aria-describedby="quakeDetail_panel-snackbar"
+      message={
+        <span id="quakeDetail_panel-snackbar" className={classes.message}>
+          <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
+          {quakeDetail_panel.error.message}
+        </span>
+      }
+    />}
+    {!quakeDetail_panel.loading && !quakeDetail_panel.error &&     <Panel
+        />}
+        <TextField
+      label="Name"
+              />
+
     </DashboardLayout>
   );
 }

@@ -4,6 +4,7 @@ import DashboardLayout from "..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
@@ -31,19 +32,17 @@ function TipsSaatGempa() {
   const classes = useStyles();
   // Queries
   // Item mappers
-  const hello3ItemMapper = (it: any) => ({
-  });
   
-
   return (
     <DashboardLayout
       title="Tips Saat Gempa"
       avatarIcon="paw"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-            <Greeting
-                who={"Devi item jelekkkkk"}
-                                          />
+              <Greeting
+      who="Devi item jelekkkkk"
+              />
+
     </DashboardLayout>
   );
 }

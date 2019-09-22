@@ -4,6 +4,7 @@ import DashboardLayout from "..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
@@ -36,37 +37,39 @@ function Quakes() {
     id, mw, name, noaaLocation, noaaTsunami, originTime
   } 
 }
-`);
+`, {
+  });
   // Item mappers
   const quakesItemMapper = (it: any) => ({
     "title": it.name,
     "icon": (it.noaaTsunami ? 'water' : 'wifi'),
     "iconBackground": (it.mw >= 7 ? 'red' : 'silver'),
     "subheader": dateFns.format(dateFns.parseISO(it.originTime), "PPpppp"),
+    "linkTo": (`/quakes/${it.id}`),
   });
   
-
   return (
     <DashboardLayout
       title="Earthquakes"
       avatarIcon="wifi"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-      {quakes.loading && <CircularProgress />}
-      {quakes.error && 
-        <SnackbarContent
-        className={clsx(classes.error)}
-        aria-describedby="quakes-snackbar"
-        message={
-          <span id="quakes-snackbar" className={classes.message}>
-            <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
-            {quakes.error.message}
-          </span>
-        }
-      />}
-      {!quakes.loading && !quakes.error &&       <ItemGridStandard
-                        items={quakes.data.quakes2.map(quakesItemMapper)}
-                                  />}
+          {quakes.loading && <CircularProgress />}
+    {quakes.error && 
+      <SnackbarContent
+      className={clsx(classes.error)}
+      aria-describedby="quakes-snackbar"
+      message={
+        <span id="quakes-snackbar" className={classes.message}>
+          <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
+          {quakes.error.message}
+        </span>
+      }
+    />}
+    {!quakes.loading && !quakes.error &&     <ItemGridStandard
+      items={quakes.data.quakes2.map(quakesItemMapper)}
+        />}
+
     </DashboardLayout>
   );
 }

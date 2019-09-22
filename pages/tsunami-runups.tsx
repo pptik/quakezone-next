@@ -4,6 +4,7 @@ import DashboardLayout from "..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
@@ -73,7 +74,8 @@ function TsunamiRunups() {
     waterHeight
     year
   } 
-}`);
+}`, {
+  });
   // Item mappers
   const tsunamiRunupsItemMapper = (it: any) => ({
     "icon": ("water"),
@@ -82,28 +84,28 @@ function TsunamiRunups() {
     "iconBackground": (it.waterHeight > 3 ? "red" : (it.waterHeight > 1 ? "orange" : "green")),
   });
   
-
   return (
     <DashboardLayout
       title="Tsunami Runups"
       avatarIcon="water"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-      {tsunamiRunups.loading && <CircularProgress />}
-      {tsunamiRunups.error && 
-        <SnackbarContent
-        className={clsx(classes.error)}
-        aria-describedby="tsunamiRunups-snackbar"
-        message={
-          <span id="tsunamiRunups-snackbar" className={classes.message}>
-            <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
-            {tsunamiRunups.error.message}
-          </span>
-        }
-      />}
-      {!tsunamiRunups.loading && !tsunamiRunups.error &&       <ItemGridStandard
-                        items={tsunamiRunups.data.tsunamiRunups2.map(tsunamiRunupsItemMapper)}
-                                  />}
+          {tsunamiRunups.loading && <CircularProgress />}
+    {tsunamiRunups.error && 
+      <SnackbarContent
+      className={clsx(classes.error)}
+      aria-describedby="tsunamiRunups-snackbar"
+      message={
+        <span id="tsunamiRunups-snackbar" className={classes.message}>
+          <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
+          {tsunamiRunups.error.message}
+        </span>
+      }
+    />}
+    {!tsunamiRunups.loading && !tsunamiRunups.error &&     <ItemGridStandard
+      items={tsunamiRunups.data.tsunamiRunups2.map(tsunamiRunupsItemMapper)}
+        />}
+
     </DashboardLayout>
   );
 }

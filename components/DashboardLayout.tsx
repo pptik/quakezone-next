@@ -25,6 +25,7 @@ import WorkIcon from "@material-ui/icons/Work";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { FunctionComponent } from "react";
+import Head from "next/head";
 
 function Copyright() {
   return (
@@ -159,6 +160,7 @@ const DashboardLayout: FunctionComponent<Props> = ({
   children, title, avatarUrl, avatarIcon, avatarIconSet
 }) => {
   title = title || "QuakeZone";
+  const pageTitle = title === "QuakeZone" ? title : title + " - " + "QuakeZone";
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -173,6 +175,9 @@ const DashboardLayout: FunctionComponent<Props> = ({
 
   return (
     <div className={classes.root}>
+      <Head>
+        <title>{pageTitle}</title>
+      </Head>
       <AppBar
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}

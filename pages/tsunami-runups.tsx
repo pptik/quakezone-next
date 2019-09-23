@@ -83,6 +83,7 @@ function TsunamiRunups() {
     "title": it.locationName,
     "subheader": (`${it.year}-${it.month}-${it.arrivalDay} ${it.arrivalHour}:${it.arrivalMinute} (${it.waterHeight} meters)`),
     "iconBackground": (it.waterHeight > 3 ? "red" : (it.waterHeight > 1 ? "orange" : "green")),
+    "linkTo": (`/tsunami-runups/${it.id}`),
   });
   
   return (

@@ -11,17 +11,13 @@ const TextFieldEntry: FunctionComponent<{
   mapboxApiAccessToken: string;
   label: string;
   featurePoint?: any;
+  featureLat?: number;
+  featureLon?: number;
   featureName?: string;
   [prop: string]: any;
-}> = ({ mapboxApiAccessToken, label, featurePoint, featureName, ...props }) => {
+}> = ({ mapboxApiAccessToken, label, featurePoint, featureLat, featureLon, featureName, ...props }) => {
   const classes = useStyles();
-  const [viewport, setViewport] = useState({
-    width: 400,
-    height: 400,
-    latitude: featurePoint.coordinates[1],
-    longitude: featurePoint.coordinates[0],
-    zoom: 5
-  } as any);
+  featurePoint = (featurePoint ? featurePoint : { coordinates: [ featureLon, featureLat ], type: "Point" });
   const mapStyle = fromJS(qzStyle).set("sources", {
     composite: {
       url: "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2",
@@ -38,6 +34,13 @@ const TextFieldEntry: FunctionComponent<{
       }
     }
   });
+  const [viewport, setViewport] = useState({
+    width: 400,
+    height: 400,
+    latitude: featurePoint.coordinates[1],
+    longitude: featurePoint.coordinates[0],
+    zoom: 5
+  } as any);
   return (
     <FormControl margin="normal">
       <InputLabel shrink={true}>{label}</InputLabel>

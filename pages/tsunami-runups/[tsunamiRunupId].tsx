@@ -31,75 +31,66 @@ const useStyles = makeStyles(theme => ({
   },
 }));
   
-function TsunamiSourceId() {
+function TsunamiRunupId() {
   const classes = useStyles();
   const router = useRouter();
   // Queries
-  const tsunamiSource_panel = useQuery(gql`
-  query TsunamiSourceDetail($id: String!) {
-  tsunamiSource: tsunamiSources(id: $id) {
-    causeCode
+  const tsunamiRunup_panel = useQuery(gql`
+  query TsunamiRunupDetail($id: String!) {
+  tsunamiRunup: tsunamiRunup(id: $id) {
+    arrivalDay
+    arrivalHour
+    arrivalMinute
     country
     damageDescription
     damageMillionsDollars
     day
     deaths
     deathsDescription
-    eventValidity
-    focalDepth
+    distanceFromSource
+    doubtful
+    firstMotion
+    horizontalInundation
     hour
     housesDamaged
     housesDamagedDescription
     housesDestroyed
     housesDestroyedDescription
     id
+    infoSource
     injuries
     injuriesDescription
     latitude
     locationName
     longitude
-    maxWaterHeight
     minute
-    missing
-    missingDescription
     month
-    primaryMagnitude
+    noaaTsunamiEventId
+    noaaTsunamiRunupId
+    period
     regionCode
     second
     state
-    totalDamageMillionsDollars
-    totalDamageMillionsDollarsDescription
-    totalDeaths
-    totalDeathsDescription
-    totalHousesDamaged
-    totalHousesDamagedDescription
-    totalHousesDestroyed
-    totalHousesDestroyedDescription
-    totalInjuries
-    totalInjuriesDescription
-    totalMissing
-    totalMissingDescription
-    warningStatus
+    travelTimeHours
+    travelTimeMinutes
+    tsunamiSource
+    typeOfMeasurement
+    waterHeight
     year
-    tsunamiMagnitudeAbe
-    tsunamiMagnitudeIida
-    tsunamiIntensitySoloviev
-    noaaTsunamiEventId
-    infoSource
  } 
 }`, {
     "variables": {
-      "id": router.query.tsunamiSourceId,
+      "id": router.query.tsunamiRunupId,
     },
   });
   // Item mappers
 
   // avoid page crash if titleExpr not ready yet
-  let appBarTitle = "Tsunami Source Detail";
+  let appBarTitle = "Tsunami Runup Detail";
   try {
-    appBarTitle = tsunamiSource_panel.data && `${tsunamiSource_panel.data.tsunamiSource.locationName} - Tsunami Sources`;
+    appBarTitle = tsunamiRunup_panel.data && `${tsunamiRunup_panel.data.tsunamiRunup.locationName} - Tsunami Runups`;
   } catch (e) {
-    console.warn("Cannot evaluate page title:", "tsunamiSource_panel.data && `${tsunamiSource_panel.data.tsunamiSource.locationName} - Tsunami Sources`", e);
+    console.warn("Cannot evaluate page title:", "tsunamiRunup_panel.data && `${tsunamiRunup_panel.data.tsunamiRunup.locationName} - Tsunami Runups`", e);
   }
 
   return (
@@ -108,26 +99,26 @@ function TsunamiSourceId() {
       avatarIcon="water"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-          {tsunamiSource_panel.loading && <CircularProgress />}
-    {tsunamiSource_panel.error && 
+          {tsunamiRunup_panel.loading && <CircularProgress />}
+    {tsunamiRunup_panel.error && 
       <SnackbarContent
       className={clsx(classes.error)}
-      aria-describedby="tsunamiSource_panel-snackbar"
+      aria-describedby="tsunamiRunup_panel-snackbar"
       message={
-        <span id="tsunamiSource_panel-snackbar" className={classes.message}>
+        <span id="tsunamiRunup_panel-snackbar" className={classes.message}>
           <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
-          {tsunamiSource_panel.error.message}
+          {tsunamiRunup_panel.error.message}
         </span>
       }
     />}
-    {!tsunamiSource_panel.loading && !tsunamiSource_panel.error &&     <Panel
+    {!tsunamiRunup_panel.loading && !tsunamiRunup_panel.error &&     <Panel
 >
           <TextFieldEntry
             label="Location"
-            value={tsunamiSource_panel.data.tsunamiSource.locationName} />
+            value={tsunamiRunup_panel.data.tsunamiRunup.locationName} />
           <GeoPointEntry
             label="Tsunami source location"
-            featureName={tsunamiSource_panel.data.tsunamiSource.locationName}             mapboxApiAccessToken={appConfig.MAPBOX_API_ACCESS_TOKEN}             featureLat={tsunamiSource_panel.data.tsunamiSource.latitude}             featureLon={tsunamiSource_panel.data.tsunamiSource.longitude} />
+            featureName={tsunamiRunup_panel.data.tsunamiRunup.locationName}             mapboxApiAccessToken={appConfig.MAPBOX_API_ACCESS_TOKEN}             featureLat={tsunamiRunup_panel.data.tsunamiRunup.latitude}             featureLon={tsunamiRunup_panel.data.tsunamiRunup.longitude} />
         </Panel>
         }
 
@@ -135,4 +126,4 @@ function TsunamiSourceId() {
   );
 }
 
-export default TsunamiSourceId;
+export default TsunamiRunupId;

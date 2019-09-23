@@ -54,9 +54,17 @@ usgsDepth, collectionName, collectionPos, usgsEpicenter
   });
   // Item mappers
 
+  // avoid page crash if titleExpr not ready yet
+  let appBarTitle = "Quake detail";
+  try {
+    appBarTitle = quakeDetail_panel.data && `${quakeDetail_panel.data.quake.name} - Earthquakes`;
+  } catch (e) {
+    console.warn("Cannot evaluate page title:", "quakeDetail_panel.data && `${quakeDetail_panel.data.quake.name} - Earthquakes`", e);
+  }
+
   return (
     <DashboardLayout
-      title="Quake detail"
+      title={appBarTitle}
       avatarIcon="wifi"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">

@@ -121,6 +121,9 @@ usgsDepth, collectionName, collectionPos, usgsEpicenter
             label="Depth (USGS)"
             suffix="km"
             value={quakeDetail_panel.data.quake.usgsDepth} />
+          <TextFieldEntry
+            label="USGS event ID"
+            value={quakeDetail_panel.data.quake.usgsId} />
         </Panel>
         }
 

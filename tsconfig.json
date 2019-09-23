@@ -22,5 +22,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "config.js", "components/DashboardLayout.tsx.js"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

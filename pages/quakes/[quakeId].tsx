@@ -12,6 +12,7 @@ import * as dateFns from "date-fns";
 import Panel from "..\\..\\components\\areas\\Panel";
 import TextFieldEntry from "..\\..\\components\\areas\\TextFieldEntry";
 import GeoPointEntry from "..\\..\\components\\areas\\GeoPointEntry";
+import LinkEntry from "..\\..\\components\\areas\\LinkEntry";
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -121,9 +122,10 @@ usgsDepth, collectionName, collectionPos, usgsEpicenter
             label="Depth (USGS)"
             suffix="km"
             value={quakeDetail_panel.data.quake.usgsDepth} />
-          <TextFieldEntry
+          <LinkEntry
             label="USGS event ID"
-            value={quakeDetail_panel.data.quake.usgsId} />
+            target="_blank"
+            href={`https://earthquake.usgs.gov/earthquakes/eventpage/${quakeDetail_panel.data.quake.usgsId}/executive`}             title={quakeDetail_panel.data.quake.usgsId} />
         </Panel>
         }
 

@@ -12,15 +12,15 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta
             name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-          />
+            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
+          <link rel="shortcut icon" type="image/png" href="/static/favicon.png" />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
-          <link rel="shortcut icon" type="image/png" href="/static/favicon.png" />
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+          {/* https://www.mapbox.com/install/js/cdn-install/ */}
+          <link href="https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />

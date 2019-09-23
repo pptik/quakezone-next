@@ -1,5 +1,6 @@
 
 import clsx from "clsx";
+import config from "..\\..\\config.json";
 import DashboardLayout from "..\\..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
@@ -10,6 +11,7 @@ import gql from "graphql-tag";
 import * as dateFns from "date-fns";
 import Panel from "..\\..\\components\\areas\\Panel";
 import TextFieldEntry from "..\\..\\components\\areas\\TextFieldEntry";
+import GeoPointEntry from "..\\..\\components\\areas\\GeoPointEntry";
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -36,7 +38,12 @@ function QuakeId() {
   const quakeDetail_panel = useQuery(gql`
   query QuakeDetail($id: String!) {
   quake(id: $id) {
-    id, mw, name, noaaLocation, noaaTsunami, originTime
+    id, usgsId, name, usgsName,
+originTime, usgsOriginTime, irisOriginTime,
+noaaLocation, noaaTsunami, 
+noviantyRuptureDuration, noviantyPWaveDominantPeriod, noviantyT0xtd, noviantyMw,
+mw, usgsMw, irisMw, noaaTsunami, noaaTsunamiEventId, unknown1,
+usgsDepth, collectionName, collectionPos, usgsEpicenter
   }
 }
 `, {
@@ -66,13 +73,55 @@ function QuakeId() {
     />}
     {!quakeDetail_panel.loading && !quakeDetail_panel.error &&     <Panel
 >
-            <TextFieldEntry
+          <TextFieldEntry
             label="Name"
-                        value={quakeDetail_panel.data.quake.name}
-/>            <TextFieldEntry
+            value={quakeDetail_panel.data.quake.name} />
+          <GeoPointEntry
+            label="Epicenter (USGS)"
+            featurePoint={quakeDetail_panel.data.quake.usgsEpicenter}             featureName={quakeDetail_panel.data.quake.name}             mapboxApiAccessToken={config.MAPBOX_API_ACCESS_TOKEN} />
+          <TextFieldEntry
             label="Origin time"
-                        value={quakeDetail_panel.data.quake.originTime}
-/>        </Panel>
+            value={dateFns.format(dateFns.parseISO(quakeDetail_panel.data.quake.originTime), "PPpppp")} />
+          <TextFieldEntry
+            label="Origin time (USGS)"
+            value={quakeDetail_panel.data.quake.usgsOriginTime} />
+          <TextFieldEntry
+            label="Origin time (IRIS)"
+            value={quakeDetail_panel.data.quake.irisOriginTime} />
+          <TextFieldEntry
+            label="Location (NOAA)"
+            value={quakeDetail_panel.data.quake.noaaLocation} />
+          <TextFieldEntry
+            label="Rupture duration (Novianty)"
+            suffix="seconds"
+            value={quakeDetail_panel.data.quake.noviantyRuptureDuration} />
+          <TextFieldEntry
+            label="P-wave dominant period (Novianty)"
+            suffix="seconds"
+            value={quakeDetail_panel.data.quake.noviantyPWaveDominantPeriod} />
+          <TextFieldEntry
+            label="T0 × Td (Novianty)"
+            value={quakeDetail_panel.data.quake.noviantyT0xtd} />
+          <TextFieldEntry
+            label="Mw"
+            value={quakeDetail_panel.data.quake.mw} />
+          <TextFieldEntry
+            label="Mw (Novianty)"
+            value={quakeDetail_panel.data.quake.noviantyMw} />
+          <TextFieldEntry
+            label="Mw (USGS)"
+            value={quakeDetail_panel.data.quake.usgsMw} />
+          <TextFieldEntry
+            label="Mw (IRIS)"
+            value={quakeDetail_panel.data.quake.irisMw} />
+          <TextFieldEntry
+            label="Tsunami (NOAA)"
+            value={quakeDetail_panel.data.quake.noaaTsunami} />
+          <TextFieldEntry
+            label="Depth (USGS)"
+            suffix="km"
+            value={quakeDetail_panel.data.quake.usgsDepth} />
+        </Panel>
         }
 
     </DashboardLayout>

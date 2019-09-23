@@ -1,6 +1,6 @@
 
 import clsx from "clsx";
-import config from "..\\config.json";
+import appConfig from "..\\appConfig.json";
 import DashboardLayout from "..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";

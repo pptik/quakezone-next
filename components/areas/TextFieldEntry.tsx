@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { TextField, Paper } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import InputAdornment from '@material-ui/core/InputAdornment';
 

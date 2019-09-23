@@ -1,11 +1,11 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import withApollo from "next-with-apollo";
-import config from "../config.json";
+import appConfig from "../appConfig.json";
 
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      uri: config.GRAPHQL_URL,
+      uri: appConfig.GRAPHQL_URL,
       cache: new InMemoryCache().restore(initialState || {}),
       request: operation => {
         //const token = localStorage.getItem('token')

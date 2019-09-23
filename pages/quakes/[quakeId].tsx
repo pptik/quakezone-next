@@ -1,6 +1,6 @@
 
 import clsx from "clsx";
-import config from "..\\..\\config.json";
+import appConfig from "..\\..\\appConfig.json";
 import DashboardLayout from "..\\..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
@@ -78,7 +78,7 @@ usgsDepth, collectionName, collectionPos, usgsEpicenter
             value={quakeDetail_panel.data.quake.name} />
           <GeoPointEntry
             label="Epicenter (USGS)"
-            featurePoint={quakeDetail_panel.data.quake.usgsEpicenter}             featureName={quakeDetail_panel.data.quake.name}             mapboxApiAccessToken={config.MAPBOX_API_ACCESS_TOKEN} />
+            featurePoint={quakeDetail_panel.data.quake.usgsEpicenter}             featureName={quakeDetail_panel.data.quake.name}             mapboxApiAccessToken={appConfig.MAPBOX_API_ACCESS_TOKEN} />
           <TextFieldEntry
             label="Origin time"
             value={dateFns.format(dateFns.parseISO(quakeDetail_panel.data.quake.originTime), "PPpppp")} />

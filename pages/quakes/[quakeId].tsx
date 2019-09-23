@@ -93,10 +93,10 @@ usgsDepth, collectionName, collectionPos, usgsEpicenter
             value={dateFns.format(dateFns.parseISO(quakeDetail_panel.data.quake.originTime), "PPpppp")} />
           <TextFieldEntry
             label="Origin time (USGS)"
-            value={quakeDetail_panel.data.quake.usgsOriginTime} />
+            value={dateFns.format(dateFns.parseISO(quakeDetail_panel.data.quake.usgsOriginTime), "PPpppp")} />
           <TextFieldEntry
             label="Origin time (IRIS)"
-            value={quakeDetail_panel.data.quake.irisOriginTime} />
+            value={dateFns.format(dateFns.parseISO(quakeDetail_panel.data.quake.irisOriginTime), "PPpppp")} />
           <TextFieldEntry
             label="Location (NOAA)"
             value={quakeDetail_panel.data.quake.noaaLocation} />

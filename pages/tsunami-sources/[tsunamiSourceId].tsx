@@ -1,7 +1,7 @@
 
 import clsx from "clsx";
-import appConfig from "..\\appConfig.json";
-import DashboardLayout from "..\\components\\DashboardLayout";
+import appConfig from "..\\..\\appConfig.json";
+import DashboardLayout from "..\\..\\components\\DashboardLayout";
 import { Grid, makeStyles, Paper,
   CircularProgress, SnackbarContent } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
@@ -9,7 +9,8 @@ import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import * as dateFns from "date-fns";
-import ItemGridStandard from "..\\components\\areas\\ItemGridStandard";
+import Panel from "..\\..\\components\\areas\\Panel";
+import TextFieldEntry from "..\\..\\components\\areas\\TextFieldEntry";
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -29,12 +30,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
   
-function TsunamiSources() {
+function TsunamiSourceId() {
   const classes = useStyles();
+  const router = useRouter();
   // Queries
-  const tsunamiSources = useQuery(gql`
-  {
-  tsunamiSources3(filter:{limit: 100, order:"year DESC"}) {
+  const tsunamiSource_panel = useQuery(gql`
+  query TsunamiSourceDetail($id: String!) {
+  tsunamiSource: tsunamiSources(id: $id) {
     causeCode
     country
     damageDescription
@@ -85,42 +87,48 @@ function TsunamiSources() {
     infoSource
  } 
 }`, {
+    "variables": {
+      "id": router.query.tsunamiSourceId,
+    },
   });
   // Item mappers
-  const tsunamiSourcesItemMapper = (it: any) => ({
-    "title": (`${it.latitude},${it.longitude} - ${it.locationName} ${it.year}-${it.month}-${it.day}`),
-    "subheader": it.primaryMagnitude,
-    "icon": ("water"),
-    "iconBackground": (it.primaryMagnitude >= 7 ? "red" : "silver"),
-    "linkTo": (`/tsunami-sources/${it.id}`),
-  });
-  
+
+  // avoid page crash if titleExpr not ready yet
+  let appBarTitle = "Tsunami Source Detail";
+  try {
+    appBarTitle = tsunamiSource_panel.data && `${tsunamiSource_panel.data.tsunamiSource.locationName} - Tsunami Sources`;
+  } catch (e) {
+    console.warn("Cannot evaluate page title:", "tsunamiSource_panel.data && `${tsunamiSource_panel.data.tsunamiSource.locationName} - Tsunami Sources`", e);
+  }
+
   return (
     <DashboardLayout
-      title="Tsunami Sources"
+      title={appBarTitle}
       avatarIcon="water"
       avatarIconSet="Ionicons"
       avatarUrl="/static/favicon.png">
-          {tsunamiSources.loading && <CircularProgress />}
-    {tsunamiSources.error && 
+          {tsunamiSource_panel.loading && <CircularProgress />}
+    {tsunamiSource_panel.error && 
       <SnackbarContent
       className={clsx(classes.error)}
-      aria-describedby="tsunamiSources-snackbar"
+      aria-describedby="tsunamiSource_panel-snackbar"
       message={
-        <span id="tsunamiSources-snackbar" className={classes.message}>
+        <span id="tsunamiSource_panel-snackbar" className={classes.message}>
           <ErrorIcon className={clsx(classes.icon, classes.iconVariant)} />
-          {tsunamiSources.error.message}
+          {tsunamiSource_panel.error.message}
         </span>
       }
     />}
-    {!tsunamiSources.loading && !tsunamiSources.error &&     <ItemGridStandard
-      items={tsunamiSources.data.tsunamiSources3.map(tsunamiSourcesItemMapper)}
+    {!tsunamiSource_panel.loading && !tsunamiSource_panel.error &&     <Panel
 >
-        </ItemGridStandard>
+          <TextFieldEntry
+            label="Location"
+            value={tsunamiSource_panel.data.tsunamiSource.locationName} />
+        </Panel>
         }
 
     </DashboardLayout>
   );
 }
 
-export default TsunamiSources;
+export default TsunamiSourceId;

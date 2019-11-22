@@ -11,6 +11,7 @@ import gql from "graphql-tag";
 import * as dateFns from "date-fns";
 import OpenWeather from "..\\components\\areas\\OpenWeather";
 import Greeting from "..\\components\\areas\\Greeting";
+import TsunamiPotentialForm from "../components/TsunamiPotentialForm";
 
 const useStyles = makeStyles(theme => ({
   error: {
@@ -47,15 +48,7 @@ function Index() {
       >
         </OpenWeather>
         
-        <Greeting
-      who="Devi"
-      >
-        </Greeting>
-        
-        <Greeting
-      who="Helmi"
-      >
-        </Greeting>
+        <TsunamiPotentialForm/>
         
 
     </DashboardLayout>

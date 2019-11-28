@@ -1,0 +1,12 @@
+{
+  "name": "mn6q7z-17ld7h",
+  "arn": "arn:aws:iam::703881650703:role/mn6q7z-17ld7h",
+  "service": [
+    "lambda.amazonaws.com",
+    "edgelambda.amazonaws.com"
+  ],
+  "policy": {
+    "arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  },
+  "region": "us-east-1"
+}

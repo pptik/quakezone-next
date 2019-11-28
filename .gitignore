@@ -154,7 +154,9 @@ typings/
 .vuepress/dist
 
 # Serverless directories
-.serverless/
+# NOTE: .serverless/ MUST BE COMMITTED DUE TO serverless-nextjs-component
+#.serverless/
+.serverless_nextjs/
 
 # FuseBox cache
 .fusebox/

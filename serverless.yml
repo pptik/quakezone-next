@@ -1,0 +1,4 @@
+quakezone-next:
+  component: serverless-next.js
+  inputs:
+    runtime: nodejs12.x

@@ -2,7 +2,8 @@ import { makeStyles, Button } from "@material-ui/core";
 import { FunctionComponent, useState, FormEvent } from "react";
 import TextField from '@material-ui/core/TextField';
 import React from 'react';
-import * as tf from '@tensorflow/tfjs';
+import * as tf from '@tensorflow/tfjs-core';
+import * as tfLayers from '@tensorflow/tfjs-layers';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -30,7 +31,7 @@ const TsunamiPotentialForm: FunctionComponent<Props> = ({}) => {
 
   const loadModel = async () => {
     console.log('Loading model...');
-    setModel(await tf.loadLayersModel('/static/novianty2018-tfjs/model.json'));
+    setModel(await tfLayers.loadLayersModel('/static/novianty2018-tfjs/model.json'));
     console.log('Loaded');
   }
   
@@ -48,22 +49,22 @@ const TsunamiPotentialForm: FunctionComponent<Props> = ({}) => {
    */
   const predict = async (t0: number, td: number, mw: number) => {
     // # Raw inputs
-    const in_bias = 1
-    const t0xtd = t0 * td
+    const in_bias = 1;
+    const t0xtd = t0 * td;
 
     // Normalization vectors
-    const ri_min = [0, 9.45, 2.7, 42.54644, 6.987921]
-    const ri_max = [1, 203.8708, 7.5, 877.4648, 8.995652]
+    const ri_min = [0, 9.45, 2.7, 42.54644, 6.987921];
+    const ri_max = [1, 203.8708, 7.5, 877.4648, 8.995652];
     
-    const t0_norm = (t0 - ri_min[1]) / (ri_max[1] - ri_min[1])
-    const td_norm = (td - ri_min[2]) / (ri_max[2] - ri_min[2])
-    const t0xtd_norm = (t0xtd - ri_min[3]) / (ri_max[3] - ri_min[3])
-    const mw_norm = (mw - ri_min[4]) / (ri_max[4] - ri_min[4])
-    const x = [in_bias, t0_norm, td_norm, t0xtd_norm, mw_norm]
+    const t0_norm = (t0 - ri_min[1]) / (ri_max[1] - ri_min[1]);
+    const td_norm = (td - ri_min[2]) / (ri_max[2] - ri_min[2]);
+    const t0xtd_norm = (t0xtd - ri_min[3]) / (ri_max[3] - ri_min[3]);
+    const mw_norm = (mw - ri_min[4]) / (ri_max[4] - ri_min[4]);
+    const x = [in_bias, t0_norm, td_norm, t0xtd_norm, mw_norm];
 
     console.info('Inputs:', x);
     const y = await model.predict(tf.tensor([x])).array();
-    console.info('Tsunami potential output neurons: Yes=', y[0][0], ' No=', y[0][1])
+    console.info('Tsunami potential output neurons: Yes=', y[0][0], ' No=', y[0][1]);
     // console.info('Tsunami potential: Yes=%s No=%s' % (float(y[0]) >= 0.5, float(y[1]) >= 0.5))
 
     return {'tsunamiYes': y[0][0], 'tsunamiNo': y[0][1]};

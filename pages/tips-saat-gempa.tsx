@@ -39,12 +39,7 @@ function TipsSaatGempa() {
       title="Tips Saat Gempa"
       avatarIcon="paw"
       avatarIconSet="Ionicons"
-      avatarUrl="/static/favicon.png">
-              <Greeting
-      who="Devi item jelekkkkk"
-      >
-        </Greeting>
-        
+      avatarUrl="/static/favicon.png">        
 
     </DashboardLayout>
   );

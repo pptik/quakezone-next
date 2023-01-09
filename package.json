@@ -22,7 +22,7 @@
     "clsx": "^1.1.0",
     "graphql": "^15.0.0",
     "immer": "^6.0.3",
-    "luxon": "^1.23.0",
+    "luxon": "^1.28.1",
     "next": "^9.3.4",
     "next-with-apollo": "^5.0.0",
     "node-fetch": "^2.6.0",
